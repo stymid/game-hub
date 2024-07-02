@@ -17,13 +17,9 @@ function App() {
 
         <Show above="lg">
           {/* only show on lg devices and above */}
-          <GridItem area={"aside"} bg={"gold"}>
-            Aside
-          </GridItem>
+          <GridItem area={"aside"}>Aside</GridItem>
         </Show>
-        <GridItem area={"main"} bg={"dodgerblue"}>
-          Main
-        </GridItem>
+        <GridItem area={"main"}>Main</GridItem>
       </Grid>
     </>
   );

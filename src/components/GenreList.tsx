@@ -1,4 +1,11 @@
-import { Button, HStack, Image, List, ListItem } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Heading,
+  Image,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import GenreCardSkeleton from "./GenreCardSkeleton";
@@ -12,18 +19,24 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   if (error) return null;
   return (
     <>
+      <Heading fontSize={"2xl"} marginBottom={3}>
+        Genres
+      </Heading>
       {isLoading && <GenreCardSkeleton />}
       <List>
         {data.map((genre) => (
           <ListItem key={genre.id} paddingY={1}>
             <HStack>
               <Image
+                objectFit="cover"
                 boxSize={"32px"}
                 borderRadius={8}
                 src={getCroppedImageUrl(genre.image_background)}
               />
 
               <Button
+                whiteSpace={"normal"}
+                textAlign={"left"}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => {
                   onSelectGenre(genre);
@@ -31,9 +44,10 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
                 fontSize={"lg"}
                 variant={"link"}
               >
-                {genre.name.length > 13
+                {genre.name}
+                {/* {genre.name.length > 13
                   ? genre.name.substring(0, 13) + "..."
-                  : genre.name}
+                  : genre.name} */}
               </Button>
             </HStack>
           </ListItem>

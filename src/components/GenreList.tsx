@@ -16,13 +16,14 @@ interface Props {
 }
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
-  if (error) return null;
+  if (error) return null; //  not work becaus genres.ts
   return (
     <>
       <Heading fontSize={"2xl"} marginBottom={3}>
         Genres
       </Heading>
       {isLoading && <GenreCardSkeleton />}
+      {/* "not work because of the genres.ts" */}
       <List>
         {data.map((genre) => (
           <ListItem key={genre.id} paddingY={1}>

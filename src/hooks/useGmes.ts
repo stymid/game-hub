@@ -12,13 +12,6 @@ export interface Game {
   rating_top: number;
 }
 
-interface params {
-  genres: number;
-  parent_platforms: number;
-  ordering: string;
-  search: string;
-}
-
 const apiClient = new APIClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) =>

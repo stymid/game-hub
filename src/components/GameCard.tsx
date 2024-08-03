@@ -1,18 +1,31 @@
-import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  HStack,
+  Heading,
+  Image,
+  Skeleton,
+} from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 import PlatformiconList from "./PlatformiconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "../services/image-url";
 import Emoji from "./Emoji";
+import { useState } from "react";
 
 interface Props {
   game: Game;
 }
 
 const GameCard = ({ game }: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <Card>
-      <Image src={getCroppedImageUrl(game.background_image)} />
+      {isLoading && <Skeleton height="200px"></Skeleton>}
+      <Image
+        src={getCroppedImageUrl(game.background_image)}
+        onLoad={() => setIsLoading(false)}
+      />
       <CardBody>
         <HStack marginBottom={3} justifyContent="space-between">
           <PlatformiconList

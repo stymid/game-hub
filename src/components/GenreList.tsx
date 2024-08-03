@@ -6,15 +6,15 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-import useGenres, { Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
+import useGameQueryStor from "../services/zustand/store";
 import GenreCardSkeleton from "./GenreCardSkeleton";
 
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenreId?: number;
-}
-const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
+const GenreList = () => {
+  const selectedGenreId = useGameQueryStor((s) => s.gameQuery.genreId);
+  const setSelectedGenreId = useGameQueryStor((s) => s.setGenreId);
+
   const { data, isLoading, error } = useGenres();
   if (error) return null; //  not work becaus genres.ts
   return (
@@ -40,7 +40,7 @@ const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
                 textAlign={"left"}
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 onClick={() => {
-                  onSelectGenre(genre);
+                  setSelectedGenreId(genre.id);
                 }}
                 fontSize={"lg"}
                 variant={"link"}

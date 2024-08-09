@@ -8,6 +8,7 @@ const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
   return (
     <form
+      style={{ width: "100%" }}
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) setSearchText(ref.current.value);
